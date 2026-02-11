@@ -2,3 +2,4 @@
 mcp-server-*
 *.exe
 .env
+mcp-server
