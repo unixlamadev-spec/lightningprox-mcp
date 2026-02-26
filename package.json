@@ -1,0 +1,36 @@
+{
+  "name": "lightningprox-mcp",
+  "version": "1.0.1",
+  "description": "MCP server for LightningProx — pay for AI inference with Bitcoin Lightning. No API keys. Pay per request in sats.",
+  "bin": {
+    "lightningprox-mcp": "bin/run.js"
+  },
+  "scripts": {
+    "postinstall": "node bin/install.js"
+  },
+  "keywords": [
+    "mcp",
+    "bitcoin",
+    "lightning",
+    "ai",
+    "claude",
+    "gpt",
+    "sats",
+    "crypto",
+    "payments",
+    "model-context-protocol",
+    "autonomous-agents",
+    "aiprox"
+  ],
+  "author": "LPX Digital Group LLC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unixlamadev-spec/lightningprox-mcp"
+  },
+  "homepage": "https://lightningprox.com",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": "[\"bin/\", \"mcp-server-linux-amd64\", \"mcp-server-linux-arm64\", \"mcp-server-darwin-amd64\", \"mcp-server-darwin-arm64\", \"mcp-server-windows-amd64.exe\", \"README.md\", \"LICENSE\"]"
+}
