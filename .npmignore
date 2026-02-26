@@ -1,0 +1,6 @@
+# keep binaries
+!mcp-server-linux-amd64
+!mcp-server-linux-arm64
+!mcp-server-darwin-amd64
+!mcp-server-darwin-arm64
+!mcp-server-windows-amd64.exe
