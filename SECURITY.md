@@ -12,7 +12,7 @@ If you discover a security vulnerability in this project, please report it respo
 
 **Do not open a public GitHub issue for security vulnerabilities.**
 
-Contact: security@lpxdigital.com
+Contact: unixlamadev@gmail.com
 
 Include in your report:
 - Description of the vulnerability
