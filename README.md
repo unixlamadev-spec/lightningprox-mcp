@@ -1,5 +1,9 @@
 # lightningprox-mcp
 
+<a href="https://glama.ai/mcp/servers/unixlamadev-spec/lightningprox-mcp">
+<img width="380" height="200" src="https://glama.ai/mcp/servers/unixlamadev-spec/lightningprox-mcp/badge" />
+</a>
+
 MCP server for [LightningProx](https://lightningprox.com) — pay-per-request AI via Bitcoin Lightning. No accounts, no API keys. Load a spend token, start querying.
 
 ## Install
