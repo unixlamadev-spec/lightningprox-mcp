@@ -3,5 +3,6 @@
   "description": "MCP server for LightningProx — pay-per-request AI via Bitcoin Lightning. No accounts, no API keys.",
   "version": "1.0.2",
   "homepage": "https://lightningprox.com",
-  "license": "MIT"
+  "license": "MIT",
+  "dockerfile": "Dockerfile"
 }
