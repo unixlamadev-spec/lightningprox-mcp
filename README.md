@@ -16,7 +16,7 @@ npx lightningprox-mcp
 
 LightningProx is an AI gateway that accepts Bitcoin Lightning payments instead of API keys. You load a prepaid spend token, pass it in the `X-Spend-Token` header, and each request is deducted from your balance in sats. No signup, no monthly plan, no credentials to manage.
 
-**Models available:** Claude (Sonnet, Haiku, Opus) and GPT-4 — accessed through a single endpoint with a single spend token.
+**Models available:** 19 models across 5 providers — Anthropic (Claude Opus), OpenAI (GPT-4 Turbo), Together.ai (Llama 4 Maverick, Llama 3.3, Meta-Llama 3.1, Mixtral, DeepSeek-V3), Mistral (Large, Medium, Small, Nemo, Codestral, Devstral, Pixtral, Magistral), and Google (Gemini 2.5 Flash, Gemini 2.5 Pro, Gemini 3 Flash/Pro preview). Accessed through a single endpoint with a single spend token.
 
 **Vision / multimodal:** Pass `image_url` directly in your request. URL mode only — no base64 encoding required.
 
@@ -50,7 +50,7 @@ claude mcp add lightningprox -- npx lightningprox-mcp
 
 | Tool | Description |
 |------|-------------|
-| `ask_ai` | Send a prompt to Claude or GPT, authenticated via spend token |
+| `ask_ai` | Send a prompt to any of 19 models, authenticated via spend token. Pass `model` to select (e.g. `gemini-2.5-flash`, `mistral-large-latest`, `gpt-4-turbo`). |
 | `ask_ai_vision` | Send a prompt with an image URL for multimodal analysis |
 | `check_balance` | Check remaining sats on a spend token |
 | `list_models` | List available models with per-call pricing |
