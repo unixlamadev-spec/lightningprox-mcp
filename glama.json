@@ -1,8 +1,6 @@
 {
-  "name": "lightningprox-mcp",
-  "description": "MCP server for LightningProx — pay-per-request AI via Bitcoin Lightning. No accounts, no API keys.",
-  "version": "1.0.2",
-  "homepage": "https://lightningprox.com",
-  "license": "MIT",
-  "dockerfile": "Dockerfile"
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "maintainers": [
+    "unixlamadev-spec"
+  ]
 }
