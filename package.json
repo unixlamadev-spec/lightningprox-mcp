@@ -6,7 +6,9 @@
     "lightningprox-mcp": "bin/run.js"
   },
   "scripts": {
-    "postinstall": "node bin/install.js || true"
+    "postinstall": "node bin/install.js || true",
+    "build": "echo No build step required",
+    "start": "node bin/run.js"
   },
   "keywords": [
     "mcp",
