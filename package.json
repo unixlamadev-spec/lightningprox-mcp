@@ -1,12 +1,12 @@
 {
   "name": "lightningprox-mcp",
   "version": "1.1.0",
-  "description": "MCP server for LightningProx — pay for AI inference with Bitcoin Lightning. No API keys. Pay per request in sats. 19 models across 5 providers.",
+  "description": "MCP server for LightningProx \u2014 pay for AI inference with Bitcoin Lightning. No API keys. Pay per request in sats. 19 models across 5 providers.",
   "bin": {
     "lightningprox-mcp": "bin/run.js"
   },
   "scripts": {
-    "postinstall": "node bin/install.js"
+    "postinstall": "node bin/install.js || true"
   },
   "keywords": [
     "mcp",

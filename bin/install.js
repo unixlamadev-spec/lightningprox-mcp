@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+
+process.on('uncaughtException', (err) => {
+  console.warn('Warning:', err.message);
+  process.exit(0);
+});
+
 const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
@@ -19,8 +25,8 @@ const key = `${platform}-${arch}`;
 const binary = binaries[key];
 
 if (!binary) {
-  console.error(`Unsupported platform: ${key}`);
-  process.exit(1);
+  console.warn(`Warning: Unsupported platform: ${key}`);
+  process.exit(0);
 }
 
 const src = path.join(__dirname, '..', binary);
@@ -31,6 +37,6 @@ if (fs.existsSync(src)) {
   fs.chmodSync(dest, '755');
   console.log(`✅ LightningProx MCP installed for ${key}`);
 } else {
-  console.error(`Binary not found: ${src}`);
-  process.exit(1);
+  console.warn(`Warning: Binary not found: ${src}`);
+  process.exit(0);
 }
