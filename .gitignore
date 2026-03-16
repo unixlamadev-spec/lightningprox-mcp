@@ -1,5 +1,4 @@
-/mcp-server
 mcp-server-*
 *.exe
 .env
-mcp-server
+node_modules/
