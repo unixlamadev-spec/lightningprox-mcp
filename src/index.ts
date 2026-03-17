@@ -15,6 +15,16 @@ import {
 
 const LIGHTNINGPROX_URL = process.env.LIGHTNINGPROX_URL || "https://lightningprox.com";
 
+const NO_TOKEN_MESSAGE = `No spend token found. To use LightningProx:
+1. Go to lightningprox.com/topup
+2. Choose an amount (minimum 100 sats ~$0.07)
+3. Pay the Lightning invoice
+4. Add your token to MCP config:
+   LIGHTNINGPROX_SPEND_TOKEN=lnpx_...
+5. Restart Claude Desktop/Cursor
+
+Get your token: lightningprox.com/topup`;
+
 // ============================================================================
 // TOOL DEFINITIONS
 // ============================================================================
@@ -61,16 +71,16 @@ const tools: Tool[] = [
   {
     name: "get_balance",
     description:
-      "Check the remaining balance on a LightningProx spend token. Returns balance in sats.",
+      "Check the remaining balance on a LightningProx spend token. Returns balance in sats. Uses LIGHTNINGPROX_SPEND_TOKEN env var if no token provided.",
     inputSchema: {
       type: "object",
       properties: {
         spend_token: {
           type: "string",
-          description: "LightningProx spend token (starts with lnpx_)",
+          description: "LightningProx spend token (starts with lnpx_). Optional if LIGHTNINGPROX_SPEND_TOKEN env var is set.",
         },
       },
-      required: ["spend_token"],
+      required: [],
     },
   },
   {
@@ -145,8 +155,10 @@ async function getBalance(spendToken: string): Promise<any> {
     headers: { "X-Spend-Token": spendToken },
   });
   if (!res.ok) {
-    const err = await res.json() as any;
-    throw new Error(err.error || `Balance check failed: ${res.status}`);
+    const err = await res.json().catch(() => ({})) as any;
+    const e = new Error(err.error || `Balance check failed: ${res.status}`) as any;
+    e.status = res.status;
+    throw e;
   }
   return res.json();
 }
@@ -249,19 +261,30 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       case "get_balance": {
         const { spend_token } = args as any;
-        const data = await getBalance(spend_token);
+        const token = spend_token || process.env.LIGHTNINGPROX_SPEND_TOKEN;
 
-        const sats = data.balance_sats ?? data.sats ?? data.balance ?? "?";
-        const usd = data.balance_usd != null ? ` (~$${Number(data.balance_usd).toFixed(4)})` : "";
+        if (!token) {
+          return { content: [{ type: "text", text: NO_TOKEN_MESSAGE }] };
+        }
 
-        return {
-          content: [
-            {
-              type: "text",
-              text: `⚡ Balance: ${sats} sats${usd}\n\nToken: ${spend_token.slice(0, 16)}…\nTop up: ${LIGHTNINGPROX_URL}/topup`,
-            },
-          ],
-        };
+        try {
+          const data = await getBalance(token);
+          const sats = data.balance_sats ?? data.sats ?? data.balance ?? "?";
+          const usd = data.balance_usd != null ? ` (~$${Number(data.balance_usd).toFixed(4)})` : "";
+          return {
+            content: [
+              {
+                type: "text",
+                text: `⚡ Balance: ${sats} sats${usd}\n\nToken: ${token.slice(0, 16)}…\nTop up: ${LIGHTNINGPROX_URL}/topup`,
+              },
+            ],
+          };
+        } catch (err: any) {
+          if (err.status === 404 || err.status === 401 || err.status === 403) {
+            return { content: [{ type: "text", text: NO_TOKEN_MESSAGE }] };
+          }
+          throw err;
+        }
       }
 
       case "generate_invoice": {
