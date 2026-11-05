@@ -1,50 +1,51 @@
 {
   "name": "lightningprox-mcp",
-  "version": "1.2.2",
-  "description": "MCP server for LightningProx — pay for AI inference with Bitcoin Lightning. No API keys. Pay per request in sats. 19 models across 5 providers.",
-  "main": "dist/index.js",
+  "version": "1.3.0",
+  "description": "MCP server for LightningProx: pay for AI inference with Bitcoin Lightning. No API keys. Pay per request in sats. 24 models across 5 providers.",
+  "type": "module",
   "bin": {
-    "lightningprox-mcp": "dist/index.js"
+    "lightningprox-mcp": "bin/lightningprox-mcp.js"
   },
+  "main": "src/server.js",
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "prepare": "npm run build"
+    "start": "node bin/lightningprox-mcp.js",
+    "test": "node --test test/tools.test.js",
+    "smoke": "node scripts/smoke-live.js"
   },
   "keywords": [
     "mcp",
+    "model-context-protocol",
     "bitcoin",
     "lightning",
+    "l402",
     "ai",
     "claude",
     "gpt",
+    "gemini",
     "sats",
-    "crypto",
     "payments",
-    "model-context-protocol",
-    "autonomous-agents",
-    "aiprox"
+    "autonomous-agents"
   ],
   "author": "LPX Digital Group LLC",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unixlamadev-spec/lightningprox-mcp"
+    "url": "git+https://github.com/unixlamadev-spec/lightningprox-mcp.git"
   },
-  "homepage": "https://lightningprox.com",
+  "homepage": "https://github.com/unixlamadev-spec/lightningprox-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/unixlamadev-spec/lightningprox-mcp/issues"
+  },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18"
   },
-  "files": [
-    "dist/",
-    "README.md",
-    "LICENSE"
-  ],
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.0"
-  },
-  "devDependencies": {
-    "typescript": "^5.0.0",
-    "@types/node": "^20.0.0"
+    "@modelcontextprotocol/sdk": "^1.32.2"
   }
 }

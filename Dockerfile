@@ -1,11 +1,7 @@
-FROM golang:1.22-alpine AS builder
+FROM node:20-alpine
 WORKDIR /app
-COPY go.mod go.sum ./
-RUN go mod download
-COPY . .
-RUN go build -o lightningprox-mcp ./cmd/mcp-server
-
-FROM alpine:latest
-WORKDIR /app
-COPY --from=builder /app/lightningprox-mcp .
-ENTRYPOINT ["./lightningprox-mcp"]
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+COPY bin ./bin
+COPY src ./src
+ENTRYPOINT ["node", "bin/lightningprox-mcp.js"]
